@@ -1,0 +1,689 @@
+@charset "utf-8";
+
+/* 
+  메인컬러: #023586
+  메인 폰트컬러: #111
+  서브 폰트컬러: #4a4a4a
+ */
+
+
+ /* add reset */
+ a { color: inherit; text-decoration: none; }
+ img {max-width: 100%; vertical-align: middle;}
+ li { list-style: none; }
+
+ /* tmp */
+
+/* common */
+[class*=line-clamp] {
+  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.line-clamp-1 { -webkit-line-clamp: 1; max-height: calc(1em*1.2); }
+.line-clamp-2 { -webkit-line-clamp: 2; max-height: calc(1em*1.2*2); }
+.line-clamp-3 { -webkit-line-clamp: 3; max-height: calc(1em*1.2*3); }
+
+/* layout */
+.inner {max-width: 1400px; padding: 0 20px; margin: 0 auto;}
+
+/* button */
+.hamburger-menu {
+  position: absolute;
+  left: 0; top: 0;
+  width: 60px; height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+.hamburger-menu button { 
+  width: 20px; 
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.hamburger-menu span {
+  /* display: block;  */
+  margin-bottom: 2px; 
+  width: 100%; height: 2px; background-color: #fff;
+  border-radius: 3px;
+  transition: margin 0.25s 0.25s, transform 0.25s ; 
+}
+
+.hamburger-menu.active span {
+  transition: margin 0.25s, transform 0.25s 0.25s;
+}
+.hamburger-menu.active .bar1 {
+  margin-top: 8px;
+  margin-bottom: -4px;
+  transform: rotate(45deg);
+}
+.hamburger-menu.active .bar2 {
+  transform: rotate(45deg);
+  
+}
+.hamburger-menu.active .bar3 {
+  margin-top: -4px;
+  transform: rotate(135deg);
+}
+
+
+  
+ /* hd */
+.hd { 
+  background-color: #023586; position: fixed;
+  z-index: 100; width: 100%; top: 0;
+  min-height: 60px;
+ }
+
+.hd .logo { position:absolute; top: 50%; left: 50%; transform:translate(-50%,-50%); }
+.hd .gnb { display: flex; }
+.hd .pc-gnb { display: flex; }
+.hd .mob-gnb { display: none; }
+
+.hd .gnb .gnb-left,
+.hd .gnb .gnb-right { width:50%; }
+
+.hd .gnb .gnb-right { text-align: right; }
+.hd .gnb .dep1 { display: inline-block; position: relative; }
+.hd .gnb .dep1 > a { display: block; color: #fff; line-height: 90px; padding: 0 20px; text-transform: uppercase; }
+/* 가상선택자 */
+.hd .gnb .dep1 > a::after {
+  content: ""; display: block; width: 0; height: 2px; background-color: #fff;
+  position: absolute; left: 0; right: 0; bottom: 0;
+  transition: width 0.3s;
+}
+.hd .gnb .dep1:hover > a::after { width: 100%; }
+
+.hd .mob-gnb { 
+  position: fixed;
+  height: 100%; 
+  left: 0;
+  visibility: hidden;
+  transition: visibility 0.3s ease;
+}
+.hd .mob-gnb .gnb-box {
+  width: 250px; 
+  background-color: #888;
+  padding-top: 60px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+.hd .mob-gnb::before {
+  content: "";
+  width: 100vw;
+  top: 0; bottom: 0;
+  position: absolute;
+  background-color: rgb(0,0,0,0.4);
+  opacity: 0;
+  /* 가상요소의 바탕영역이 부드럽게 나타나게 */
+  transition: opacity 0.3s ease;
+}
+.hd .mob-gnb .dep1 { display: block; }
+.hd .mob-gnb .dep1 > a { 
+  line-height: 60px;
+  padding: 0 20px;
+ }
+/* 열린 상태 */
+.hd .mob-gnb.active {
+  visibility: visible;
+}
+.hd .mob-gnb.active .gnb-box {
+  transform: translateX(0%);
+}
+.hd .mob-gnb.active::before { 
+  opacity: 1;  
+}
+
+
+
+/* content-common */
+.content { padding: 30px 0; }
+.content .sec-header { 
+  display: flex;
+  margin-bottom: 50px;
+}
+.content .sec-header .main-tit {
+  /* flex: 1 1 0; */
+  flex: 1;
+  font-family: "Montserrat"; font-weight: 700; font-size: 23px;
+  /* 자간 여백주기 */
+  letter-spacing: 1;
+   /* 소문자->대문자로 바꿔주는 속성 */
+  text-transform: uppercase; 
+}
+.content .btn-more span {
+  font-family: "Montserrat"; font-size: 14px;
+  text-transform: uppercase; border-bottom: 1px solid #111;
+  padding-bottom: 3px;
+ }
+
+
+/* content-magazine */
+.magazine .magazine-list{ 
+  display: flex;
+   /*헤더부분이랑 정렬 맞추기 위해서 부모 여백을 깎아주는 것  */
+  margin: 0 -15px;
+  flex-wrap: wrap;
+}
+.magazine .magazine-list .list-item{
+  position: relative;
+  margin: 0 12px 10px;
+}
+
+
+.magazine .magazine-list .list-item{
+ flex-grow: 0;
+ flex-shrink: 1;
+ flex-basis: calc( (100% / 3) - 24px );
+} 
+
+.magazine .magazine-list .list-item .txt-area{ 
+  position: absolute;
+  bottom: 0;
+  padding: 30px;
+  color: #fff; 
+}
+.magazine .magazine-list .list-item .txt-area .txt-tit {
+  font-family: "Gmarket Sans"; font-weight: 700; font-size: 30px;
+  margin-bottom: 20px;
+}
+.magazine .magazine-list .list-item .img-area::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.5));
+  transition: height 0.2s;
+}
+.magazine .magazine-list .list-item:hover .img-area::after {
+  height: 100%;
+}
+
+
+/* content-story */
+.story .story-list { 
+  display: flex; 
+  flex-wrap: wrap;
+  margin:  0 -10px;
+}
+.story .story-list .list-item {
+  /* width:50% */
+  flex-basis: calc( 50% - 20px);
+  margin: 0 10px 20px;
+  display: flex;
+  
+}
+.story .story-list .list-item .img-area,
+.story .story-list .list-item .txt-area {
+  /* flex: 1 50%; */
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 50%;
+}
+.story .story-list .list-item .img-area {
+  margin-right: 20px;
+  position: relative;
+}
+.story .story-list .list-item .img-area a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 50%;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.5));
+  transition: height 0.3s;
+}
+.story .story-list .list-item:hover .img-area a::after {
+  height: 100%;
+}
+.story .story-list .list-item .txt-area .txt-label {
+  font-size: 14px;
+  color: #023586;
+  text-transform: uppercase;
+  /* 폰트 크기에 따라 여백이 일정하게 */
+  margin-bottom: 2em;
+}
+.story .story-list .list-item .txt-area .txt-tit {
+  /* width: 220px; */
+  font-size: 24px;
+  font-family: "Gmarket Sans";
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+.story .story-list .list-item .txt-area .txt-desc {
+  /* width: 220px; */
+  font-size: 14px;
+  color:#4a4a4a;
+  margin-bottom: 1em;
+}
+.story .story-list .list-item .txt-area .txt-date {
+  font-size: 10px;
+  color:#4a4a4a;
+}
+
+
+/* kv */
+.kv { margin-top: 90px; margin-bottom: 80px; }
+.kv .list-item { position: relative; }
+/* 슬라이드 위 어두운 부분 */
+.kv .list-item a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.3);
+}
+.kv .list-item:hover a::after {
+  background-color: rgba(0,0,0,0.0);
+}
+
+/* slick-common */
+/* slick에서 준 속성 값을 이용해서 좌우 버튼 만들기 */
+.slider .slick-arrow { 
+  width: 30px; height: 30px;
+  border: transparent;
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  position: absolute;
+  top:50%;
+  /* transform: translateY(-50%); <- 밑 rotate 값 때문에 적용이 안됨 */
+  z-index: 1;
+  font: 0/0 a;
+  opacity: 0.8;
+}
+.slider .slick-prev {
+  left: 20px;
+  transform: translateY(-50%) rotate(-45deg);
+}
+.slider .slick-next {
+  transform: translateY(-50%) rotate(135deg); 
+  right: 20px;
+}
+/* indicator 버튼 만들기 */
+.slider .slick-dots {
+  position: absolute;
+  display: flex;
+  left: 0; right: 0;
+  justify-content: center;
+  padding: 1em;
+}
+.slider .slick-dots li + li {
+  margin-left: 25px;
+}
+.slider .slick-dots button {
+  width: 8px; height: 8px;
+  background-color:rgba(0,0,0,0.25);
+  border-radius: 20px;
+  padding: 0;
+  /* 
+  폰트 안보이게하는 트릭
+  font:  font-size / line-height 
+  */
+  font: 0/0 a;
+}
+.slider .slick-dots .slick-active button {
+  background-color: #023586;
+}
+/* 활성화 된 거 제외하고 후버 시 색깔을 바뀌게 */
+.slider .slick-dots :hover:not(.slick-active) button {
+  background-color: #023586;
+}
+
+
+/* contetn-promotion */
+.promotion .pro-list { 
+  /* display: flex; */
+}
+.promotion .pro-list .list-item { margin: 0 10px; }
+.promotion .pro-list .img-area { margin-bottom: 20px;  position: relative;}
+.promotion .pro-list .img-area a::after {
+  content:"";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 0%;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.5));
+  transition: height 0.1s;
+}
+.promotion .pro-list .img-area:hover a::after { height: 100%;}
+
+.promotion .pro-list .img-area .badge { 
+  position: absolute;
+  top: 0; left: 0;
+  font-size: 12px;
+  background-color: #023586;
+  color: #fff;
+  padding: 0.2em 0.5em;
+}
+/* 가상선택자를 활용한 배지 만들어주기 */
+.promotion .pro-list .badge::before { content: "진행중";}
+.promotion .pro-list .state-done .badge::before { content: "종료";}
+.promotion .pro-list .state-announce .badge::before { content: "당첨자발표";}
+
+.promotion .pro-list .state-done .badge { background-color: #4a4a4a;}
+.promotion .pro-list .state-announce .badge { background-color: #ffb204;}
+
+
+/* 텍스트 영역 */
+.promotion .pro-list .txt-area .txt-tit {
+  font-family: "Gmarket Sans";
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 0.5em;
+}
+.promotion .pro-list .txt-area .btn-more {
+  color: #4a4a4a;
+  font-size: 14px;
+}
+.promotion .pro-list .txt-area .txt-tit:hover { text-decoration: underline; }
+.promotion .pro-list .txt-area .btn-more:hover { text-decoration: underline; }
+.promotion .slider .slick-arrow { top:40%; }
+.promotion .slider .slick-prev { left: 30px; }
+.promotion .slider .slick-next { right: 30px; }
+
+
+/* products */
+.products .product-list { padding: 0 30px; }
+.products .product-list .list-item { margin: 0 20px; }
+.products .product-list .img-area { margin-bottom: 20px;  position: relative; }
+.products .product-list .img-area a::after {
+  content:"";
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  opacity: 0;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.5));
+}
+.products .product-list .list-item:hover .img-area a::after { opacity: 1; }
+.products .product-list .list-item .txt-area:hover a { text-decoration: underline; }
+
+.products .slider .slick-arrow {
+  border-top: 2px solid #4a4a4a;
+  border-left: 2px solid #4a4a4a;
+  opacity: 0.3;
+} 
+.products .slider .slick-prev { left: 0; }
+.products .slider .slick-next { right: 0; }
+
+
+/* content-notice */
+.notice { padding-top: 100px; padding-bottom: 0; }
+.notice .notice-list { display: flex; }
+.notice .notice-list .list-item {  flex:1; position: relative; }
+.notice .notice-list .list-item a { display: block; padding: 50px 100px 50px 50px; }
+
+/* 가상요소 */
+.notice .notice-list .list-item > a::after {
+  content:"";
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  opacity: 0;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.5));
+  transition: 0.5s;
+}
+.notice .notice-list .list-item:hover > a::after { opacity: 1; } 
+.notice .notice-list .list-item .label { 
+  display: inline-block;
+  color: #023586; font-size: 14px;
+  margin-bottom: 1em; 
+}
+.notice .notice-list .list-item .txt-tit { font-size:  18px; }
+.notice .notice-list .list-item .ico-arr {
+  display: inline-block;
+  width: 20px; height: 20px;
+  border: transparent;
+  border-top: 2px solid #4a4a4a;
+  border-left: 2px solid #4a4a4a;
+  /* transform:  rotate(135deg); */
+
+  position: absolute;
+  right: 0; top: 50%;
+  transform:  translateY(-50%) rotate(135deg);
+  right: 50px;
+}
+.notice .notice-list .list-item + .list-item::after {
+  content: "";
+  width: 1px; height: 80px;
+  background-color: #023586;
+  display: block;
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+}
+
+/* footer */
+.ft { 
+  background-color: #454a56; 
+  padding-top: 50px; 
+}
+.ft .box-wrap { display: flex; }
+.ft .box { flex: 1; color: #fff; padding-right: 20px; }
+.ft .box .txt-tit {
+  font-family: "Montserrat"; 
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: capitalize;
+  margin-bottom: 1em;
+}
+.ft .box .box-body { font-size: 14px; }
+.ft .box .info-list li,
+.ft .box .contact-list li { 
+  margin-bottom: 0.5em;
+}
+.ft .box .info-list li:hover > a,
+.ft .box .contact-list li:hover > a {
+  text-decoration: underline;
+}
+.ft .box .contact-list li:nth-child(3) { font-size: 12px; }
+.ft .box .brand-list li {
+  display: inline-block;
+  margin: 0 10px 20px 0;
+}
+.ft .box .brand-list li:first-child { width: 100%; }
+.ft .brand-list li:not(:first-child) img { height: 24px; }
+
+/* sns-ico */
+.ft .box .sns-list li { 
+  margin-right: 10px;
+  display: inline-block;
+}
+.ft .box .sns-list li a {
+  display: block;
+  width: 45px; height: 45px;
+  background-color: #fff;
+  border-radius: 50px;
+  
+  display: flex;
+  justify-content: center;
+}
+.ft .box .sns-list .ico-fa img { width: 15px;}
+.ft .box .sns-list .ico-in img { width: 25px;}
+.ft .box .sns-list .ico-yo img { width: 30px;}
+
+/* Brand-site */
+.ft .select-label { 
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: left;
+  padding: 0 1em;
+  color: #fff;
+  line-height: 45px;
+
+  background-image: url(../images/ft_ico_arr.svg);
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+/* 버튼 위를 기준점으로 회색박스 넓이를 고정시켜주기 */
+.ft .family-site {
+  margin-top: 1em;
+  max-width:200px;
+  position: relative;
+}
+.ft .select-list {
+  background-color: #979797;
+  border-radius: 5px;
+  padding: 1em 0;
+
+  position: absolute;
+  /* width: 100%; */
+  left: 0; right: 0;
+  bottom: 100%;
+  margin-bottom: 1px;
+}
+.ft .select-list li { line-height: 3em; padding: 0 1em; }
+.ft .select-list li:hover { background-color: rgba(2,53,134,.15);}
+
+
+/* ft 최하단 */
+.ft .ft-menu { text-align: center; padding: 0.5em 0; }
+.ft .ft-menu li {
+  display: inline-block;
+  font-size: 11px;
+  padding: 0 0.5em;
+  color: #fff;
+}
+.ft .ft-menu li { position: relative; }
+.ft .ft-menu li + li::after { 
+  content: "";
+  width: 1px; height: 1em;
+  background-color: #fff;
+  display: block;
+  position: absolute;
+  /* top, left, bottom, right, z-index 얘네는 position과 한 쌍 */
+  top: 50%; left: 0;
+  transform: translateY(-50%);
+}
+
+/* .ft .ft-menu li:nth-child(2) { color: rgb(200, 0, 0); font-weight: bold; } */
+.emp-red { color: rgb(200, 0, 0) !important; }
+.ft .copyright { 
+  font-size: 11px;
+  color: #fff;
+  text-align: center;
+  padding: 10px 15px;
+  border-top: 1px solid #fff;;
+  opacity: 0.5;
+}
+
+/* ~1100 */
+@media screen and (max-width:1100px) {
+  .hd .logo { width: 200px; }
+  
+  /* notice */
+  .notice .notice-list { flex-wrap: wrap; }
+  .notice .notice-list .list-item {
+    flex: 1 100%;
+  }
+  .notice .notice-list .list-item > a {
+    padding: 1.5em 5em 1.5em 2.5%;
+  }
+  .notice .notice-list .list-item + .list-item::after {
+    width: 95%; height: 1px;
+    top:0;
+    transform: none;
+    margin: 0 auto;
+    left: 0; right: 0;
+  }
+  .notice .notice-list .list-item .ico-arr {
+    right: 5%;
+  }
+}
+/* ~980 */
+@media screen and (max-width:980px) {
+  .hamburger-menu { display: flex; }
+
+  /* hd */
+  /* pc일 때 pc-gnb 보이게, mob-gnb 안보이게 */
+  /* mob일 때 mob-gnb보이게, pc가 안보이게 */
+
+  /* .hd .gnb { display: none; } */
+  .hd .pc-gnb { display: none; }
+  .hd .mob-gnb { display: flex; }
+  
+  /* kv */
+  .kv { margin-top: 60px; }
+
+  /* story */
+  .story .story-list .list-item { flex-wrap: wrap; }
+  .story .story-list .list-item .img-area,
+  .story .story-list .list-item .txt-area {
+  flex: 1 100%;
+  }
+  .story .story-list .list-item .img-area {
+  margin-right: 0;
+  margin-bottom: 20px;
+  }
+  .story .story-list .list-item .txt-area {
+  min-height: 0px;
+  }
+
+  /* magazine */
+
+  .magazine .magazine-list .list-item {
+    flex-basis: calc( (100% / 2) - 24px );
+  }
+  /* 3번째부터 가려주기(n+3 = 3번째와 이후 모든 요소라는 뜻) */
+  .magazine .magazine-list .list-item:nth-child(n+3) {
+    display: none;
+  }
+
+  /* footer */
+  .ft .box-wrap { flex-wrap: wrap; margin-bottom: 4em; }
+  .ft .box { flex: 1 50%; margin-bottom: 50px; } 
+
+} 
+
+/* ~768 */
+@media screen and (max-width:768px) {
+  .story .story-list .list-item {
+    /* 회색박스 영역의 아이들을 다시 좌우로 배치 */
+    flex-wrap: nowrap;
+    flex-basis: calc( 100% - 24px);
+  }
+  .story .story-list .list-item .img-area,
+  .story .story-list .list-item .txt-area {
+  flex: 1 50%;
+  }
+  .story .story-list .list-item .img-area {
+  margin-right: 20px;
+  margin-bottom: 0px;
+  }
+  
+  /* magazine */
+  .magazine .magazine-list .list-item {
+    flex-basis: calc( 100% - 20px );
+  }
+  .magazine .magazine-list .list-item .img-area img {
+    width: 100%;
+  }
+  /* promotion */
+  .promotion .pro-list { display: flex; flex-wrap: wrap; }
+  .promotion .pro-list .list-item { flex-basis: calc( 50% - 20px ); } 
+  .promotion .pro-list .list-item:nth-child(n+5) { display: none; }
+
+  /* product */
+  .products .slider .slick-arrow { visibility: hidden; }
+  .products .product-list { padding: 0; }
+  .products .product-list .list-item { 
+    width: 300px;
+    /* width: calc(100vw - 20px); */
+    width: 70vw;
+   }
+   .products .product-list .list-item .txt-area { font-size: 22px ;} 
+
+}
+
+@media screen and (max-width:640px) {
+  .promotion .pro-list .list-item img { width: 100%; }
+  
+}
+
+/* ~480 */
+@media screen and (max-width:480px) {
+  /* promotion */
+  .promotion .pro-list .list-item { flex-basis: 100%; }
+
+}
